@@ -1,0 +1,70 @@
+# Visual Studio e arquivos de build
+.vscode/
+*.code-workspace
+
+# Build e artefatos
+bin/
+obj/
+*.exe
+*.dll
+*.pdb
+*.appx
+*.appxbundle
+*.msix
+*.msixbundle
+
+# Logs e depuração
+*.log
+*.tlog
+
+# Configurações do usuário
+*.user
+*.suo
+*.userosscache
+*.sln.docstates
+*.sln.cache
+*.vs/
+
+# Configurações do Rider/JetBrains
+.idea/
+*.sln.iml
+
+# Arquivos de dependências e cache do NuGet
+packages/
+project.lock.json
+project.assets.json
+.nuget/
+*.nupkg
+*.snupkg
+
+# Configurações do sistema operacional
+Thumbs.db
+Desktop.ini
+$RECYCLE.BIN/
+
+# Certificados e segurança
+*.pfx
+*.snk
+secrets.json
+
+# Docker
+**/[Dd]ockerfile
+**/[Dd]ocker-compose*
+.dockerignore
+
+# Configurações do Entity Framework
+migrations/
+
+# Dados temporários e cache
+*.vspscc
+*.vssscc
+*.orig
+*.bak
+
+# Arquivos de publicação
+publish/
+out/
+
+# Configurações específicas do ASP.NET Core
+# appsettings.Development.json
+# appsettings.Local.json
