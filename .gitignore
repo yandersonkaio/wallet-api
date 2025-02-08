@@ -53,7 +53,7 @@ secrets.json
 .dockerignore
 
 # Configurações do Entity Framework
-migrations/
+#migrations/
 
 # Dados temporários e cache
 *.vspscc
