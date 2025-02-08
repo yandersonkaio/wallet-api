@@ -24,26 +24,54 @@ namespace Wallet.Core.Infrastructure.Database
         {
             base.OnModelCreating(modelBuilder);
 
+            modelBuilder.Entity<WalletEntity>()
+                .Property(w => w.Balance)
+                .HasColumnType("NUMERIC(18,2)")
+                .IsRequired();
+
+            modelBuilder.Entity<WalletEntity>()
+                .ToTable(t => t.HasCheckConstraint("CK_Wallet_Balance", "\"Balance\" >= 0"));
+
+            modelBuilder.Entity<Transfer>()
+                .Property(w => w.Amount)
+                .HasColumnType("NUMERIC(18,2)")
+                .IsRequired();
+
+            modelBuilder.Entity<Transfer>()
+                .ToTable(t => t.HasCheckConstraint("CK_Transactions_Amount", "\"Amount\" >= 0"));
+
+            modelBuilder.Entity<Transfer>()
+                .Property(t => t.CreatedAt)
+                .HasColumnType("timestamp without time zone");
+
+            modelBuilder.Entity<User>()
+                .Property(t => t.CreatedAt)
+                .HasColumnType("timestamp without time zone");
+
+            modelBuilder.Entity<WalletEntity>()
+                .Property(t => t.CreatedAt)
+                .HasColumnType("timestamp without time zone");
+
             // Configuração da relação 1:1 entre User e Wallet
             modelBuilder.Entity<User>()
                 .HasOne(u => u.Wallet)
                 .WithOne(w => w.User)
                 .HasForeignKey<WalletEntity>(w => w.UserId)
-                .OnDelete(DeleteBehavior.Cascade); // Se o usuário for excluído, a carteira também será
+                .OnDelete(DeleteBehavior.Cascade);
 
             // Configuração da relação 1:N entre Wallet e Transfer (remetente)
             modelBuilder.Entity<Transfer>()
                 .HasOne(t => t.SenderWallet)
                 .WithMany(w => w.SentTransfers)
                 .HasForeignKey(t => t.SenderWalletId)
-                .OnDelete(DeleteBehavior.Restrict); // Impede a exclusão da carteira se houver transferências
+                .OnDelete(DeleteBehavior.Restrict);
 
             // Configuração da relação 1:N entre Wallet e Transfer (destinatário)
             modelBuilder.Entity<Transfer>()
                 .HasOne(t => t.ReceiverWallet)
                 .WithMany(w => w.ReceivedTransfers)
                 .HasForeignKey(t => t.ReceiverWalletId)
-                .OnDelete(DeleteBehavior.Restrict); // Impede a exclusão da carteira se houver transferências
+                .OnDelete(DeleteBehavior.Restrict);
         }
     }
 }

@@ -6,17 +6,8 @@
         public string Name { get; set; }
         public string Email { get; set; }
         public string PasswordHash { get; set; }
-        public DateTime CreatedAt { get; set; }
+        public DateTime CreatedAt { get; set; } = DateTime.Now;
 
         public Wallet Wallet { get; set; }
-
-        public User(Guid id, string name, string email, string passwordHash)
-        {
-            Id = id;
-            Name = name;
-            Email = email;
-            PasswordHash = passwordHash;
-            CreatedAt = DateTime.Now;
-        }
     }
 }

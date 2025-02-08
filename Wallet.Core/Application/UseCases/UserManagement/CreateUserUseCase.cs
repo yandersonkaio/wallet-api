@@ -33,16 +33,17 @@ namespace Wallet.Core.Application.UseCases.UserManagement
                 throw new ValidationException("E-mail e senha são obrigatórios.");
 
             var existingUser = await _userRepository.GetByEmail(request.Email);
-            
+
             if (existingUser != null)
                 throw new ValidationException("Usuário já cadastrado.");
 
-            var user = new User(
-                id: Guid.NewGuid(),
-                name: request.Name,
-                email: request.Email,
-                passwordHash: _passwordHasher.Hash(request.Password) 
-            );
+            var user = new User
+            {
+                Id = Guid.NewGuid(),
+                Name = request.Name,
+                Email = request.Email,
+                PasswordHash= _passwordHasher.Hash(request.Password)
+            };
 
             await _userRepository.Add(user);
 

@@ -4,7 +4,7 @@
     {
         public Guid Id { get; set; }
         public decimal Balance { get; set; }
-        public DateTime CreatedAt { get; set; }
+        public DateTime CreatedAt { get; set; } = DateTime.Now;
 
         public Guid UserId { get; set; }
         public User User { get; set; }
