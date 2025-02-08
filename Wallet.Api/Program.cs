@@ -5,6 +5,7 @@ using System.Text;
 using Wallet.Api.Middleware;
 using Wallet.Core.Application.Interfaces;
 using Wallet.Core.Application.UseCases.UserManagement;
+using Wallet.Core.Application.UseCases.WalletManagement;
 using Wallet.Core.Infrastructure.Configurations;
 using Wallet.Core.Infrastructure.Database;
 using Wallet.Core.Infrastructure.Interfaces;
@@ -54,7 +55,14 @@ namespace Wallet
             builder.Services.AddScoped<ICreateUserUseCase, CreateUserUseCase>();
             builder.Services.AddScoped<IAuthenticateUserUseCase, AuthenticateUserUseCase>();
             builder.Services.AddScoped<ITokenService, TokenService>();
-
+            builder.Services.AddScoped<IWalletRepository, WalletRepository>();
+            builder.Services.AddScoped<ICreateWalletUseCase, CreateWalletUseCase>();
+            builder.Services.AddScoped<IGetBalanceUseCase, GetBalanceUseCase>();
+            builder.Services.AddScoped<IAddBalanceUseCase, AddBalanceUseCase>();
+            builder.Services.AddScoped<ITransferFundsUseCase, TransferFundsUseCase>();
+            builder.Services.AddScoped<IListTransfersUseCase, ListTransfersUseCase>();
+            
+            
             builder.Services.AddRouting(options => options.LowercaseUrls = true);
 
             builder.Services.AddControllers();
