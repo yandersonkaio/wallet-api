@@ -18,14 +18,14 @@ namespace Wallet.Core.Infrastructure.Services
             {
                 new Claim(JwtRegisteredClaimNames.Sub, user.Email),
                 new Claim(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString()),
-                new Claim(ClaimTypes.NameIdentifier, user.Id.ToString())
+                new Claim("userId", user.Id.ToString())
             };
 
             var token = new JwtSecurityToken(
                 issuer: settings.Issuer,
                 audience: settings.Audience,
                 claims: claims,
-                expires: DateTime.UtcNow.AddHours(1),
+                expires: DateTime.Now.AddHours(1),
                 signingCredentials: credentials
             );
 
